@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================
+   Tokens de Ionic (Light DOM -> Shadow DOM vía Custom Properties)
+   ========================================================== */
+:root {
+  --ion-color-primary: #000000;
+  --ion-color-primary-rgb: 0, 0, 0;
+  --ion-color-primary-contrast: #ffe600;
+  --ion-color-primary-contrast-rgb: 255, 230, 0;
+  --ion-color-primary-shade: #000000;
+  --ion-color-primary-tint: #1a1a1a;
+
+  --ion-background-color: #f4f1ea;
+  --ion-text-color: #000000;
+  --ion-font-family: 'Space Grotesk', 'Arial Black', system-ui, sans-serif;
+}
+
+/* ==========================================================
+   Componentes brutalistas reutilizables (Tailwind @apply)
+   ========================================================== */
+@layer components {
+  /* Botón brutalista: al pasar el ratón "se hunde" sobre su sombra */
+  .btn-brutal {
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 border-4 border-ink bg-white px-4 py-2
+      font-display text-sm font-black uppercase tracking-tight text-ink shadow-brutal-sm
+      transition-[transform,box-shadow,background-color] duration-100
+      hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none
+      active:translate-x-[3px] active:translate-y-[3px] active:shadow-none
+      focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-electric;
+  }
+
+  .card-brutal {
+    @apply border-4 border-ink bg-white shadow-brutal;
+  }
+
+  .field-brutal {
+    @apply mt-1 block min-h-[48px] w-full rounded-none border-4 border-ink bg-white px-3 py-2 font-display
+      text-base font-bold text-ink shadow-brutal-sm placeholder:font-medium placeholder:text-neutral-600
+      focus:bg-acid focus:outline-none focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-2
+      focus-visible:outline-electric;
+  }
+
+  .label-brutal {
+    @apply font-mono text-xs font-bold uppercase tracking-widest text-ink;
+  }
+}
+
+/* ==========================================================
+   Personalización del Shadow DOM de Ionic (no accesible a Tailwind)
+   ========================================================== */
+.brutal-toolbar {
+  --background: #000000;
+  --color: #ffe600;
+  --border-width: 0;
+  --min-height: 64px;
+}
+
+.brutal-content {
+  --background: #f4f1ea;
+}
+
+.incident-item {
+  --background: #ffffff;
+  --padding-start: 16px;
+  --inner-padding-end: 16px;
+  --border-width: 0;
+}
+
+ion-item-option.opt-done {
+  --background: #00f07f;
+  --color: #000000;
+  border-left: 4px solid #000;
+  font-weight: 900;
+}
+
+ion-item-option.opt-delete {
+  --background: #ff5c5c;
+  --color: #000000;
+  border-left: 4px solid #000;
+  font-weight: 900;
+}
+
+.brutal-fab {
+  --background: #ffe600;
+  --background-hover: #ffe600;
+  --background-activated: #00e5ff;
+  --color: #000000;
+  --border-radius: 0;
+  --border-width: 4px;
+  --border-style: solid;
+  --border-color: #000000;
+  --box-shadow: 6px 6px 0 0 #000;
+  width: 64px;
+  height: 64px;
+  transition: transform 100ms ease;
+}
+
+.brutal-fab:hover {
+  transform: translate(3px, 3px);
+  --box-shadow: 3px 3px 0 0 #000;
+}
+
+.brutal-fab:active {
+  transform: translate(6px, 6px);
+  --box-shadow: none;
+}
+
+.brutal-modal {
+  --border-radius: 0;
+  --border-width: 4px;
+  --border-style: solid;
+  --border-color: #000000;
+  --box-shadow: 10px 10px 0 0 #000;
+  --width: 100%;
+  --height: 90vh;
+  --background: #f4f1ea;
+  align-items: flex-end;
+}
+
+@media (min-width: 768px) {
+  .brutal-modal {
+    --width: 640px;
+    --height: 85vh;
+    align-items: center;
+  }
+}
+
+.brutal-toast {
+  --background: #000000;
+  --color: #ffe600;
+  --border-radius: 0;
+  --box-shadow: 6px 6px 0 0 #ffe600;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Accesibilidad: sin animaciones para quien las desactiva en el sistema */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}
